@@ -1,4 +1,4 @@
-"""ObservatoriodelaviviendaMty URL Configuration
+"""app URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.1/topics/http/urls/
@@ -19,11 +19,19 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.defaults import page_not_found
 
+def custom_page_not_found(request, exception):
+    return page_not_found(request, exception, template_name='404.html')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
-    path('', include('equipo.urls')),
-    path('', include('inmueble.urls')),
-    path('', include('investigacion.urls')),
-    path('', include('zona.urls')),
+   
+]
+from django.conf import settings
+from django.views.static import serve
+from django.urls import path, re_path
+
+
+urlpatterns += [
+    re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT})
 ]
