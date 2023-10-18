@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'leaflet',
+    "tinymce",
+
     'home.apps.HomeConfig',
     'equipo.apps.EquipoConfig',
     'inmueble.apps.InmuebleConfig',
