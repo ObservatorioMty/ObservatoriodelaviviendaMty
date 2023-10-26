@@ -141,6 +141,8 @@ a {
       <div id="map" class="map"></div>
       <div id="layerControl" class="leaflet-control-layers leaflet-control"></div>
 
+     
+
 
       <script src="{% static 'leaflet/leaflet.js' %}"></script>
       <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}" />
@@ -149,92 +151,54 @@ a {
         var map = L.map('map').setView([0, 0], 2);
       
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
       
-        // Definir los estilos para los iconos personalizados
-        // Arreglo para almacenar las coordenadas de los marcadores
-        var markerCoords = [];
-        
- 
-
+        var zonasLayer = L.layerGroup();
+        var inmueblesLayer = L.layerGroup();
+      
         {% for zone in zones %}
-            // Obtener las coordenadas de 'desde' y 'hasta'
-            var desdeCoords = [{{ zone.latitude_since }}, {{ zone.longitude_since }}];
-            var hastaCoords = [{{ zone.latitude_until }}, {{ zone.longitude_until }}];
-
-            // Crear marcadores para 'desde' y 'hasta'
-            L.marker(desdeCoords).addTo(map)
-                .bindPopup('Desde: {{ zone.since }} - {{ zone.colony }}').openPopup();
-
-            L.marker(hastaCoords).addTo(map)
-                .bindPopup('Hasta: {{ zone.until }} - {{ zone.colony }}').openPopup();
-
-            // Crear una línea entre 'desde' y 'hasta'
-            var lineCoords = [desdeCoords, hastaCoords];
-            var line = L.polyline(lineCoords, { color: 'blue' }).addTo(map);
-
-            // Añadir los marcadores y la línea al arreglo para su gestión posterior
-            markerCoords.push(desdeCoords);
-            markerCoords.push(hastaCoords);
-            markerCoords.push(line);
+          var desdeCoords = [{{ zone.latitude_since }}, {{ zone.longitude_since }}];
+          var hastaCoords = [{{ zone.latitude_until }}, {{ zone.longitude_until }}];
+      
+          L.marker(desdeCoords).bindPopup('Desde: {{ zone.since }} - {{ zone.colony }}').addTo(zonasLayer);
+          L.marker(hastaCoords).bindPopup('Hasta: {{ zone.until }} - {{ zone.colony }}').addTo(zonasLayer);
+      
+          var lineCoords = [desdeCoords, hastaCoords];
+          var line = L.polyline(lineCoords, { color: 'blue' }).addTo(zonasLayer);
         {% endfor %}
-
+      
         {% for inmueble_instance in inmueble %}
-        var inmuebleCoords = [{{ inmueble_instance.latitude }}, {{ inmueble_instance.longitude }}];
-
-        var redIcon = new L.Icon({
+          var inmuebleCoords = [{{ inmueble_instance.latitude }}, {{ inmueble_instance.longitude }}];
+          var redIcon = new L.Icon({
             iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
             shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
             iconSize: [25, 41],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],
             shadowSize: [41, 41]
-        });
-
-        L.marker(inmuebleCoords, { icon: redIcon }).addTo(map)
-            .bindPopup('Inmueble: {{ inmueble_instance.development }}');  // Personaliza el contenido del popup según tus necesidades
-    {% endfor %}
-
-        // Coordenadas y nivel de zoom personalizados
+          });
+      
+          L.marker(inmuebleCoords, { icon: redIcon }).bindPopup('Inmueble: {{ inmueble_instance.development }}').addTo(inmueblesLayer);
+        {% endfor %}
+      
         var centerCoordinates = [25.67830309789344, -100.3143231144636];
         var zoomLevel = 13;
-
-        // Establecer la vista del mapa con las coordenadas y nivel de zoom personalizados
         map.setView(centerCoordinates, zoomLevel);
-
-        
-
-        // Seleccionar todas las capas por defecto
-        for (var key in layerGroups) {
-          map.addLayer(layerGroups[key]);
-        }
-
       
-
-        var miControlLayers = L.control.layers(null, layerGroups, {
-          collapsed: false,
+        var miControlLayers = L.control.layers(null, {
+          "Zonas": zonasLayer,
+          "Inmuebles": inmueblesLayer
+        }, {
+          collapsed: true,
           position: 'topright',
         });
-
-        // Agregar el control al mapa
+      
         miControlLayers.addTo(map);
-
-
-
-
-      </script>
-
-                                                
-                                          
-                                                    
-      </div>    
-    </div>
     
-</div>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+      </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    
 
 {% endblock %}
-
