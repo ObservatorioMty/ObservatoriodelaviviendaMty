@@ -48,6 +48,7 @@ class Inmueble(models.Model):
     image20 = models.ImageField(upload_to='galery/%Y-%m-%d/', blank=True, null=True, verbose_name=('galeria'))
     credits_image = models.CharField(max_length=300,null=True, blank=True, verbose_name=('Creditos de las imagenes'))
     link_image = models.URLField(null=True, blank=True,verbose_name="Link de los creditos")
+    pdf = models.FileField(blank=True, null=True, upload_to='pdf', verbose_name='pdf')
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 

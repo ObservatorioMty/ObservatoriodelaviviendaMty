@@ -1,0 +1,65 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block stylesheets %}
+<style>
+
+.image{
+    width:503px;
+    height: 316px;
+}
+
+.detalles{
+    text-align: justify;
+      color: #ffffff;
+      text-align: justify;
+      font-family: "Kreon", sans-serif;
+}
+.detalles h3{
+    font-size:30px;
+    margin-top: 3%;
+}
+@media (max-width: 768px) {
+ 
+
+
+}
+</style>
+{% endblock%}
+
+{% block content %}
+<div class="container" style="margin-top:10%;">
+    <div class="row">
+        <div class="col-md-6">
+            {% if inmuebles.image%}
+            <img  class="image" src='{{inmuebles.image.url}}' class="rounded">
+            {%else%}
+            <img  class="image" src='https://i.ibb.co/sJW1BdX/descarga.jpg' class="inmueble">
+            {%endif%}
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="detalles">
+              <h3>{{inmueble.development|truncatechars:50 }}</h3>
+              <p>{{inmueble.address}}</p>
+              <p>Número de licencia {{inmueble.no_licencia}}</p>
+              <p>Desarrolladora {{inmueble.owner}}</p>
+              <br>
+              <br>
+            </div>
+        </div>
+        <div class="col-md-6">
+            {% if inmueble.pdf%}
+            <object data="{{ inmueble.pdf.url }}" type="application/pdf" width="100%" height="100%">
+              <p class="detalles">Este navegador no soporta la visualización de archivos PDF. Puedes descargar el archivo haciendo click <a href="{{ inmueble.pdf.url }}">aquí</a>.</p>
+            </object>
+            {%else%}
+            <object data="https://www.uma.es/ejemplo-grupo-de-investigacion/navegador_de_ficheros/repositorio-grupos-de-investigacion/descargar/documentaci%C3%B3n%20becas%20junta/documento%20de%20prueba.pdf" type="application/pdf" width="80%" height="90%">
+                <p class="detalles">Este navegador no soporta la visualización de archivos PDF. Puedes descargar el archivo haciendo click <a href="https://www.uma.es/ejemplo-grupo-de-investigacion/navegador_de_ficheros/repositorio-grupos-de-investigacion/descargar/documentaci%C3%B3n%20becas%20junta/documento%20de%20prueba.pdf">aquí</a>.</p>
+              </object>
+            {%endif%}
+        </div>
+    </div>
+</div>
+{% endblock %}

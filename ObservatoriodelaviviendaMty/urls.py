@@ -24,7 +24,8 @@ def custom_page_not_found(request, exception):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
-    path('', include('zona.urls'))
+    path('', include('zona.urls')),
+    path('', include('inmueble.urls')),
    
 ]
 from django.conf import settings

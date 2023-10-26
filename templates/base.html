@@ -4,9 +4,11 @@
 {% endblock %}
 <style>
 
+@import url('https://fonts.googleapis.com/css2?family=Kreon:wght@300;400;500;600;700&display=swap');
+
 body {
   background-color:#000000;
-    font-family: Arial, sans-serif;
+    font-family: "Kreon";
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -139,6 +141,9 @@ nav a {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kreon:wght@300;400;500;600;700&display=swap" rel="stylesheet">
         <title>Observatorio de la vivienda MTY</title>
     </head>
     <body style="background-color:#000000">
@@ -156,7 +161,7 @@ nav a {
             <li class="col-sm-2"><a href="/"><img src="{% static 'base/icons/Home.png' %}" alt="Logo">Home</a></li>
             <li class="col-sm-2"><a href="#">Noticias</a></li>
             <li class="col-sm-2"><a href='{%url 'mapa'%}'>Mapa</a></li>
-            <li class="col-sm-2"><a href="#">Desarrolladoras</a></li>
+            <li class="col-sm-2"><a href='{%url 'inmueble:desarrolladoras'%}'>Desarrolladoras</a></li>
             <li class="col-sm-2"><a href="#">Border-Hub</a></li>
         </ul>
     </nav>
