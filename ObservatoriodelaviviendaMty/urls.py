@@ -27,6 +27,7 @@ urlpatterns = [
     path('', include('zona.urls')),
     path('', include('inmueble.urls')),
     path('', include('investigacion.urls')),
+    path('', include('equipo.urls')),
    
 ]
 from django.conf import settings

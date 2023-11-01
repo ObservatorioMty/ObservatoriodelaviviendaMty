@@ -1,0 +1,77 @@
+<style>
+
+
+    .card
+    {
+      background-color: #000000;
+      margin-bottom: 12px;
+      border-radius: 4px;
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      margin-left: 5%;
+      margin-right: 5%;
+      margin-top: 5%;
+      font-family: "Kreon";
+      
+    }
+    
+    .card h3{
+      font-family: "Kreon";
+      font-size: 20px ;
+      color: #FCEA1F;
+    }
+    
+    .card p{
+      text-align: justify;
+      color: #FCEA1F;
+      text-align: justify;
+      font-family: "Kreon", sans-serif;
+    }
+    
+ 
+    
+    .card-image{
+      width: 100%;
+        height: 300px;
+        color: #FCEA1F;
+        border-radius: 50px;
+        fill:#ffd53b
+       
+    }
+    
+    
+    @media (max-width: 425px){
+      .card-image{
+        height: 200px;
+        width: 100%;
+        color: #FCEA1F;
+        fill:#ffd53b
+    }
+        }
+    
+    </style>
+    
+    
+    <div class="col">
+    <a href='{% url 'team:miembro' slug=miembro.slug %}' style="color: black !important;">
+      <div class="card" style='background-color:#000000;box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);margin-bottom:20%;'>
+          <div style="width:100%">
+            {% if miembro.image%}
+            <img  class="card-image" src='{{miembro.image.url}}' class="rounded">
+            {%else%}
+            <div class="card-image">
+                <svg xmlns="http://www.w3.org/2000/svg" height="15em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"/></svg>
+            </div>
+            {%endif%}
+              
+          </div>
+          
+          <div style="height:200px; padding:0px 10px;" class="text-center ">
+              <br>
+              <h3>{{miembro.name}}</h3>
+              <br>
+              <br>
+          </div>
+      </div>
+    </a>
+    </div>
