@@ -7,7 +7,7 @@ from django.views.generic.detail import DetailView
 class VerTodosLosArticulosView(View):
     def get(self, request):
         articulos = Investigation.objects.all()
-        return render(request, 'investigaciones.html', {'articulos': articulos})
+        return render(request, 'investigaciones_todas.html', {'articulos': articulos})
     
 
 class VerArticulosPorEtiquetaView(View):
@@ -16,7 +16,7 @@ class VerArticulosPorEtiquetaView(View):
         articulos = Investigation.objects.filter(etiquetas=etiqueta)
         return render(request, 'investigaciones_etiqueta.html', {'etiqueta': etiqueta, 'articulos': articulos})
     
-    
+
     
 class InvestigationDetailView(DetailView):
     model = Investigation
