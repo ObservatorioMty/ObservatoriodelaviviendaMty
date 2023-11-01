@@ -1,0 +1,71 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block stylesheets %}
+<style>
+    .image{
+        width:100%;
+    }
+    .image1{
+        width:400px
+    }
+    .title{
+        color: #FCEA1F;
+    }
+
+    .por-quien{
+        color: #fff;
+        margin-left:70%;
+    }
+</style>
+
+{% endblock%}
+
+{% block content %}
+
+<div class="container" style="margin-top:3%;">
+    <div class="row">
+       
+        {% if articulo.image %}
+           <img  class="image" src='{{articulo.image.url}}' class="rounded">
+        {% else %}
+            <img  class="image" src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/614007/img_placeholder_1034x432.png' class="rounded">
+        {% endif %}
+
+        
+    </div>
+</div>
+<br>
+<br>
+<div class="container" >
+    <div class="row">
+       
+        <div class="col-md-8 col">
+                <h2 class="title">{{articulo.title}}</h2>
+                <div class="por-quien">
+                    <p>Por {{articulo.by}} | {{articulo.created_at|date:"d-m-Y"}}</p>
+                </div>
+                <hr style="color: #FCEA1F;    height: 6px; "/><hr/>
+                <div class="" style="color:#fff;">
+                   {{articulo.seccion1|safe}}
+                </div>
+        </div>
+        
+
+        <div class="col-md-4 col">
+            {% if articulo.image1 %}
+                <img  class="image1" src='{{articulo.image1.url}}' class="rounded">
+            {% else %}
+                <img  class="image1" src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/614007/img_placeholder_1034x432.png' class="rounded">
+            {% endif %}
+            <p style="color: #FCEA1F;">Palabras clave:
+                {% for etiqueta in articulo.etiquetas.all %}
+                  <a href="{% url 'ver_articulos_por_etiqueta' etiqueta.id %}">{{ etiqueta.nombre }}</a>
+                {% endfor %}
+              </p>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock%}

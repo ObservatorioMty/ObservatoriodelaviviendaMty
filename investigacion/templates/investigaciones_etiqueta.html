@@ -1,0 +1,21 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block stylesheets %}
+<style>
+</style>
+
+{% endblock%}
+
+{% block content %}
+
+<div class="col-12 d-flex flex-wrap align-items-stretch justify-content-center">
+    {% for articulo in articulos %}
+        <div class="col-sm-6 col-md-4 d-flex align-items-stretch">
+            {% include 'card_article.html' %}
+        </div>
+    {% endfor %}
+</div>
+
+
+{% endblock%}

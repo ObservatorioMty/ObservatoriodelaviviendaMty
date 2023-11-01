@@ -21,4 +21,8 @@ from zona.models import *
 class HomeView(ListView):
     def get(self, request, *args, **kwargs):
         return render(request, "home.html", locals())
+    
+class TerminosView(ListView):
+    def get(self, request, *args, **kwargs):
+        return render(request, "terminosycondiciones.html", locals())
    
