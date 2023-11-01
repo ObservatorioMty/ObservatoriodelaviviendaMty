@@ -8,11 +8,15 @@ class VerTodosLosArticulosView(View):
     def get(self, request):
         articulos = Investigation.objects.all()
         return render(request, 'investigaciones.html', {'articulos': articulos})
+    
+
 class VerArticulosPorEtiquetaView(View):
     def get(self, request, etiqueta_id):
         etiqueta = Etiqueta.objects.get(pk=etiqueta_id)
         articulos = Investigation.objects.filter(etiquetas=etiqueta)
         return render(request, 'investigaciones_etiqueta.html', {'etiqueta': etiqueta, 'articulos': articulos})
+    
+    
     
 class InvestigationDetailView(DetailView):
     model = Investigation
