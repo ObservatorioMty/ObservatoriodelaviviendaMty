@@ -165,7 +165,7 @@ a {
         {% for inmueble_instance in inmueble %}
           var inmuebleCoords = [{{ inmueble_instance.latitude }}, {{ inmueble_instance.longitude }}];
           var redIcon = new L.Icon({
-            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+            iconUrl: '{% static "mapa/DesarrollobigOn.png" %}',
             shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
             iconSize: [25, 41],
             iconAnchor: [12, 41],
@@ -173,22 +173,48 @@ a {
             shadowSize: [41, 41]
           });
       
-          L.marker(inmuebleCoords, { icon: redIcon }).bindPopup('Inmueble: {{ inmueble_instance.development }}').addTo(inmueblesLayer);
+          L.marker(inmuebleCoords, { icon: redIcon })
+                .bindPopup(
+                  "<div><center><b><img style='width='150px' height='150px' src='{{inmueble_instance.image.url}}'></b></center><br>Inmueble: {{ inmueble_instance.development }}<div>").addTo(inmueblesLayer);
         {% endfor %}
       
         var centerCoordinates = [25.67830309789344, -100.3143231144636];
         var zoomLevel = 13;
         map.setView(centerCoordinates, zoomLevel);
-      
-        var miControlLayers = L.control.layers(null, {
-          "Zonas": zonasLayer,
-          "Inmuebles": inmueblesLayer
-        }, {
-          collapsed: true,
-          position: 'topright',
+
+        // Crea un control personalizado
+        var customControl = L.Control.extend({
+          onAdd: function(map) {
+            var container = L.DomUtil.create('div', 'custom-control'); // Crea un elemento div con la clase 'custom-control'
+            container.innerHTML = "<div class='custom-item' onclick='toggleLayer(\"zonas\")'><img src='{% static "mapa/recursoHidircoMediumOn.png" %}'></div>" +
+                                  "<div class='custom-item' onclick='toggleLayer(\"inmuebles\")'><img src='{% static "mapa/DesarrollobigOn.png" %}'></div>";
+            return container;
+          },
         });
+
+        // Agrega el control personalizado al mapa
+        (new customControl()).addTo(map);
+
+        // Función para alternar la visibilidad de las capas
+        function toggleLayer(layerName) {
+          if (layerName === 'zonas') {
+            if (map.hasLayer(zonasLayer)) {
+              map.removeLayer(zonasLayer);
+            } else {
+              map.addLayer(zonasLayer);
+            }
+          } else if (layerName === 'inmuebles') {
+            if (map.hasLayer(inmueblesLayer)) {
+              map.removeLayer(inmueblesLayer);
+            } else {
+              map.addLayer(inmueblesLayer);
+            }
+          }
+        }
       
-        miControlLayers.addTo(map);
+       
+        inmueblesLayer.addTo(map); 
+        zonasLayer.addTo(map); 
     
       </script>
     

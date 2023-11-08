@@ -60,13 +60,4 @@ class Inmueble(models.Model):
             self.slug = slugify(self.development)
         return super().save(*args, **kwargs)
     
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.development)
-        if self.pk is not None and self.completate != self.__class__.objects.get(pk=self.pk).completate and self.completate:
-            # si completate ha cambiado de False a True, actualiza la fecha de término
-            self.term2 = datetime.now().date()
-        elif self.pk is not None and self.completate != self.__class__.objects.get(pk=self.pk).completate and not self.completate:
-            # si completate ha cambiado de True a False, reinicia la fecha de término
-            self.term2 = None
         super().save(*args, **kwargs) 
