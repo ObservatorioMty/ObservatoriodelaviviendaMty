@@ -235,10 +235,10 @@ nav a.active {
         <nav>
             
               <ul>
-                <li><a href="#"><img src="{% static 'base/icons/Home.png' %}" alt="Logo"></a></li>
-                <li><a href="#"><img src="{% static 'base/icons/NoticiaSmall.png' %}" alt="Logo"></a></li>
-                <li><a href="#"><img src="{% static 'base/icons/Mapasmall.png' %}" alt="Logo"></a></li>
-                <li><a href="#"><img src="{% static 'base/icons/Desarrolladorsmall.png' %}" alt="Logo"></a></li>
+                <li><a href="/"><img src="{% static 'base/icons/Home.png' %}" alt="Logo"></a></li>
+                <li><a href='{%url 'ver_todos_los_articulos'%}'><img src="{% static 'base/icons/NoticiaSmall.png' %}" alt="Logo"></a></li>
+                <li><a href='{%url 'mapa'%}'><img src="{% static 'base/icons/Mapasmall.png' %}" alt="Logo"></a></li>
+                <li><a href='{%url 'inmueble:desarrolladoras'%}'><img src="{% static 'base/icons/Desarrolladorsmall.png' %}" alt="Logo"></a></li>
                 <li><a href="#">Border-Hub</a></li>
               </ul>
             
