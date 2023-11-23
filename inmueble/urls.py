@@ -6,6 +6,6 @@ from .views import *
 app_name = 'inmueble'
 
 urlpatterns = [
-    path('desarrolladoras/', InmueblesView.as_view(), name='desarrolladoras'),
+    path('desarrollos/', InmueblesView.as_view(), name='desarrollos'),
     path('inmueble/<str:slug>/', InmuebleView.as_view(), name='inmueble'),
 ]

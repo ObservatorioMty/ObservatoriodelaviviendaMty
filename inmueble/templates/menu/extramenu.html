@@ -1,0 +1,33 @@
+<style>
+  
+  .li-extramenu {
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .li-extramenu a {
+    padding: 20px;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 2px solid transparent; /* Línea inicial transparente */
+  }
+
+  .li-extramenu a.active {
+    border-bottom: 2px solid #FCEA1F; /* Línea de color cuando está activo */
+  }
+
+  @media (max-width: 768px) {
+    .li-extramenu {
+      color: #fff;
+      font-weight: bold;
+    }
+  }
+    </style>
+
+<div class="container extramenu">
+    <div class="row" style="margin-top:15px; height: 20px; margin-left: 50%;">
+        <div class="col-sm-2 li-extramenu"><a href='#' style='padding: 20px; color: #fff; text-decoration: none; '>Desarrolladoras</a></div>
+        <div class="col-sm-2 li-extramenu  active"><a href='{%url 'inmueble:desarrollos'%}' style='padding: 90px; color: #fff; text-decoration: none;'>Desarrollos</a></div>
+  
+    </div>
+</div> 

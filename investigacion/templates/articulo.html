@@ -60,7 +60,7 @@
             {% endif %}
             <p style="color: #FCEA1F;">Palabras clave:
                 {% for etiqueta in articulo.etiquetas.all %}
-                  <a href="{% url 'ver_articulos_por_etiqueta' etiqueta.id %}">{{ etiqueta.nombre }}</a>
+                  <a style="color: #fff; text-decoration-line: none;"  href="{% url 'ver_articulos_por_etiqueta' etiqueta.id %}">{{ etiqueta.nombre }}</a>
                 {% endfor %}
               </p>
         </div>

@@ -23,12 +23,12 @@ class InmueblesView(View):
             'inmuebles': inmuebles
         }
 
-        return render(request, 'desarrolladoras.html', context)
+        return render(request, 'desarrollos.html', context)
 
 
 class InmuebleView(DetailView):
     model = Inmueble
-    template_name = 'desarrolladora.html'
+    template_name = 'desarrollo.html'
     context_object_name = 'inmueble'
 
     def get_context_data(self, **kwargs):

@@ -20,12 +20,27 @@
     margin-top: 3%;
 }
 @media (max-width: 768px) {
- 
+  .image{
+    width:303px;
+    height: 266px;
+}
 
+.detalles h3{
+    font-size:20px;
+    margin-top: 3%;
+}
 
+.detalles p{
+    font-size:15px;
+    margin-top: 3%;
+}
 }
 </style>
 {% endblock%}
+
+{%block extramenu%}
+{%include 'menu/extramenu.html' %}
+{%endblock%}
 
 {% block content %}
 <div class="container" style="margin-top:10%;">
@@ -36,6 +51,9 @@
             {%else%}
             <img  class="image" src='https://i.ibb.co/sJW1BdX/descarga.jpg' class="inmueble">
             {%endif%}
+            {% if inmuebles.credits_image%}
+              <p style="color: #ffffff; background-color: #000 ;font-size:15px">{{inmuebles.credits_image}} <a href="{{inmuebles.link }}" style="color: #e1ad02;">{{obra.link_image}}</a></p>
+            {%endif%}
             <br>
             <br>
             <br>
@@ -44,7 +62,18 @@
               <h3>{{inmueble.development|truncatechars:50 }}</h3>
               <p>{{inmueble.address}}</p>
               <p>Número de licencia {{inmueble.no_licencia}}</p>
+              <p>Fecha de acuerdo {{inmueble.agreement_date}}</p>
               <p>Desarrolladora {{inmueble.owner}}</p>
+              <p>Características {{inmueble.characteristics}}</p>
+              <p>Superficie {{inmueble.surface}}</p>
+              <p>Niveles {{inmueble.levels}}</p>
+              <p>No de departamentos {{inmueble.departments}}</p>
+              <p>No de locales {{inmueble.local}}</p>
+              <p>No de oficinas {{inmueble.offices}}</p>
+              <p>No de estacionamientos {{inmueble.parking}}</p>
+              <p>No de estacionamientos requeridos {{inmueble.required_parking}}</p>
+              <p>Precio  ${{inmueble.price}}</p>
+
               <br>
               <br>
             </div>

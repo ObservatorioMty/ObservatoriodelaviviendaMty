@@ -140,6 +140,9 @@ a {
 
       <script src="{% static 'leaflet/leaflet.js' %}"></script>
       <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}" />
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+      <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+      <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
 
       <script>
         var map = L.map('map').setView([0, 0], 2);
@@ -151,16 +154,22 @@ a {
         var zonasLayer = L.layerGroup();
         var inmueblesLayer = L.layerGroup();
       
+        var data = [];  // Inicializa el arreglo de datos fuera del bucle
+
         {% for zone in zones %}
-          var desdeCoords = [{{ zone.latitude_since }}, {{ zone.longitude_since }}];
-          var hastaCoords = [{{ zone.latitude_until }}, {{ zone.longitude_until }}];
-      
-          L.marker(desdeCoords).bindPopup('Desde: {{ zone.since }} - {{ zone.colony }}').addTo(zonasLayer);
-          L.marker(hastaCoords).bindPopup('Hasta: {{ zone.until }} - {{ zone.colony }}').addTo(zonasLayer);
-      
-          var lineCoords = [desdeCoords, hastaCoords];
-          var line = L.polyline(lineCoords, { color: 'blue' }).addTo(zonasLayer);
+            var desdeCoords = [{{ zone.latitude_since }}, {{ zone.longitude_since }}];
+            var hastaCoords = [{{ zone.latitude_until }}, {{ zone.longitude_until }}];
+
+            // Agregar las coordenadas al conjunto de datos
+            data.push(desdeCoords);
+            data.push(hastaCoords);
         {% endfor %}
+
+        // Crear una capa de calor con los datos y ajustes personalizados
+        var heat = L.heatLayer(data, {
+            radius: 100,  // Ajusta el radio según tus preferencias
+            gradient: {0.4: 'red', 0.65: 'yellow', 1: 'blue'}  // Escala de colores personalizada
+        }).addTo(zonasLayer);
       
         {% for inmueble_instance in inmueble %}
           var inmuebleCoords = [{{ inmueble_instance.latitude }}, {{ inmueble_instance.longitude }}];
@@ -228,6 +237,8 @@ a {
       </script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
     
 
 {% endblock %}
