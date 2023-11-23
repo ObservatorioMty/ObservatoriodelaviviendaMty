@@ -196,8 +196,7 @@ a {
           onAdd: function(map) {
             var container = L.DomUtil.create('div', 'custom-control'); // Crea un elemento div con la clase 'custom-control'
             container.innerHTML = "<div class='custom-item' onclick='toggleLayer(\"zonas\")'><img src='{% static "mapa/recursoHidircoMediumOn.png" %}'></div><br>" +
-                                  "<div class='custom-item' onclick='toggleLayer(\"inmuebles\")'><img src='{% static "mapa/DesarrollobigOn.png" %}'></div><br>"+
-                                  "<div class='custom-item' onclick='toggleLayer(\"desarrolladora\")'><img src='{% static "mapa/DesarrolladorBigOn.png" %}'></div>";
+                                  "<div class='custom-item' onclick='toggleLayer(\"inmuebles\")'><img src='{% static "mapa/DesarrollobigOn.png" %}'></div><br>";
                                   
             return container;
           },
@@ -221,13 +220,7 @@ a {
               map.addLayer(inmueblesLayer);
             }
           }
-          else if (layerName === 'desarrolladora') {
-            if (map.hasLayer(inmueblesLayer)) {
-              map.removeLayer(inmueblesLayer);
-            } else {
-              map.addLayer(inmueblesLayer);
-            }
-          }
+        
         }
       
        
