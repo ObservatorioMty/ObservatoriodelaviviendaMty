@@ -26,6 +26,8 @@ class MapaView(View):
         metodologic = Metodologic.objects.all()
         zones = Zone.objects.all()
 
+        print (inmueble)
+
         context = {
             'investigation': investigation,
             'metodologic': metodologic,
