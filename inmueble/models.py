@@ -30,6 +30,8 @@ class Inmueble(models.Model):
     credits_image = models.CharField(max_length=300,null=True, blank=True, verbose_name=('Creditos de las imagenes'))
     link_image = models.URLField(null=True, blank=True,verbose_name="Link de los creditos")
     pdf = models.FileField(blank=True, null=True, upload_to='pdf', verbose_name='pdf')
+    alert = models.CharField(max_length=900, blank=True,null=True, verbose_name=('Alerta de factibilidad'))
+    observation = models.TextField(blank=True, null=True, verbose_name=('Observaciones'))
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 

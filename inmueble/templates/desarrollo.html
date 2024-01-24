@@ -46,13 +46,13 @@
 <div class="container" style="margin-top:10%;">
     <div class="row">
         <div class="col-md-6">
-            {% if inmuebles.image%}
-            <img  class="image" src='{{inmuebles.image.url}}' class="rounded">
+            {% if inmueble.image%}
+            <img  class="image" src='{{inmueble.image.url}}' class="rounded">
             {%else%}
             <img  class="image" src='https://i.ibb.co/sJW1BdX/descarga.jpg' class="inmueble">
             {%endif%}
-            {% if inmuebles.credits_image%}
-              <p style="color: #ffffff; background-color: #000 ;font-size:15px">{{inmuebles.credits_image}} <a href="{{inmuebles.link }}" style="color: #e1ad02;">{{obra.link_image}}</a></p>
+            {% if inmueble.credits_image%}
+              <p style="color: #ffffff; background-color: #000 ;font-size:15px">{{inmueble.credits_image}} <a href="{{inmueble.link }}" style="color: #e1ad02;">{{inmueble.link_image}}</a></p>
             {%endif%}
             <br>
             <br>
@@ -60,11 +60,12 @@
             <br>
             <div class="detalles">
               <h3>{{inmueble.development|truncatechars:50 }}</h3>
-              <p>{{inmueble.address}}</p>
+              <p>{{inmueble.streat|title}}, {{inmueble.number}}, {{inmueble.address|title}}.</p>
               <p>Número de licencia {{inmueble.no_licencia}}</p>
-              <p>Fecha de acuerdo {{inmueble.agreement_date}}</p>
-              <p>Desarrolladora {{inmueble.owner}}</p>
-              <p>Características {{inmueble.characteristics}}</p>
+              <p>Fecha de acuerdo {{ inmueble.agreement_date|date:"d / m / Y" }}</p>
+              <p>Desarrolladora: {{inmueble.owner|title}}</p>
+              <p>Características: {{inmueble.characteristics|title}}</p>
+              <p>Propietario: {{inmueble.owner|title}}</p>
               <p>Superficie {{inmueble.surface}}</p>
               <p>Niveles {{inmueble.levels}}</p>
               <p>No de departamentos {{inmueble.departments}}</p>
@@ -73,6 +74,8 @@
               <p>No de estacionamientos {{inmueble.parking}}</p>
               <p>No de estacionamientos requeridos {{inmueble.required_parking}}</p>
               <p>Precio  ${{inmueble.price}}</p>
+              <p>Alerta de factibilidad: {{inmueble.alert|title}}</p>
+              <p>Observiciones: {{inmueble.observation}}</p>
 
               <br>
               <br>

@@ -138,16 +138,12 @@ a {
      
 
 
-      <script src="{% static 'leaflet/leaflet.js' %}"></script>
-      <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}" />
-      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
       <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-      <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+      <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
       <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
-    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+      
 
 
       <script>
@@ -268,26 +264,26 @@ a {
         }
       
        
-        inmueblesLayer.addTo(map); 
-        zonasLayer.addTo(map); 
-        map.addLayer(inmueblesCluster);
+        // Añade después la capa de agrupamiento
+        inmueblesCluster.addTo(map);
+
+        inmueblesLayer.addTo(map);
+        zonasLayer.addTo(map);
+
+        
+
         // Calcular límites del cuadrante que abarca todos los inmuebles
-// Calcular límites del cuadrante que abarca todos los inmuebles
-var bounds = inmueblesCluster.getBounds();
+        var bounds = inmueblesCluster.getBounds();
 
-// Obtener el centro y el zoom del cuadrante
-var center = bounds.getCenter();
-var zoom = map.getBoundsZoom(bounds);
+        // Obtener el centro y el zoom del cuadrante
+        var center = bounds.getCenter();
+        var zoom = map.getBoundsZoom(bounds);
 
-// Establecer la vista del mapa para que se centre en los límites del cuadrante
-map.setView(center, zoom);
+        // Establecer la vista del mapa para que se centre en los límites del cuadrante
+        map.setView(center, zoom);
+
         console.log("Límites del cuadrante:", bounds);
         console.log("Nivel de zoom:", map.getBoundsZoom(bounds));
-
-        var inmueblesCluster = L.markerClusterGroup({
-    disableClusteringAtZoom: 13  // Desactiva el agrupamiento a partir de este nivel de zoom
-
-    });
 
     
       </script>
