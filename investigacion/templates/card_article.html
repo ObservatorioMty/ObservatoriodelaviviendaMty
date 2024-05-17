@@ -62,7 +62,7 @@
           <div style="height:200px; padding:0px 10px;" class="text-center ">
               <br>
               <h3>{{ articulo.title }}</h3>
-              <p>{{ articulo.introduccion|safe }}</p>
+              <p>{{ articulo.introduccion|truncatewords_html:40|safe }}</p>
               <p class="card-text"><p style="color: #FCEA1F;"> 
                 {% for etiqueta in articulo.etiquetas.all %}
                 <a style="color: #FCEA1F; text-decoration-line: none;" href="{% url 'ver_articulos_por_etiqueta' etiqueta.id %}">#{{ etiqueta.nombre }}</a>
